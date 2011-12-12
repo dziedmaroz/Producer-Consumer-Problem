@@ -12,7 +12,32 @@ package threads;
  *
  * @author lucian
  */
-public class Consumer
+public class Consumer extends Thread
 {
+    SynchronizedQueue<Integer> queue;
 
+    @Override
+    public void run()
+    {
+        
+        while(true)
+        {
+            try
+            {
+                 sleep(100);
+            }
+            catch (InterruptedException e)
+            {
+                System.out.print(e);
+            } 
+            System.out.println("Consuming "+queue.removeHead());            
+            
+        }
+    }
+
+    public Consumer(SynchronizedQueue<Integer> queue)
+    {
+        this.queue = queue;
+    }
+    
 }

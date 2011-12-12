@@ -16,20 +16,14 @@ public class Main {
      */
     public static void main(String[] args)
     {
+        SynchronizedQueue<Integer> queue = new SynchronizedQueue<Integer>(20);
+        Producer producer = new Producer(queue, 500);
+        Consumer consumer = new Consumer(queue);
 
-        SynchronizedQueue<Integer> q  = new SynchronizedQueue<Integer>(5);
-        for (int i=0;i<6;i++)
-        {
-            try
-            {
-                q.addTail(i);
-            }
-            catch (SynchronizedQueueException e)
-            {
-                System.out.println(e);
-            }
+       producer.run();
+       consumer.run();
+       
 
-        }
     }
 
 }

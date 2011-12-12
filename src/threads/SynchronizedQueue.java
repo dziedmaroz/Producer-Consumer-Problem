@@ -48,21 +48,21 @@ public class SynchronizedQueue<E>
      *
      * @return
      */
-    public boolean  isFull()
+    public  boolean  isFull()
     {
         return getSize()==queue.length;
     }
-    public boolean  isEmpty ()
+    public  boolean  isEmpty ()
     {
         return getSize() == 0;
     }
 
-    public int  getCapacity ()
+    public  int  getCapacity ()
     {
         return queue.length;
     }
 
-    public int getSize ()
+    public  int getSize ()
     {
         if ((queue.length+queue.length-(head-tail))%(queue.length)==0 && queue[head]!=null)
         {
@@ -71,28 +71,35 @@ public class SynchronizedQueue<E>
         return (queue.length+queue.length-(head-tail))%(queue.length);
     }
 
-    public synchronized  E removeHead () throws SynchronizedQueueException
+    public synchronized  E removeHead ()
     {
-        if (isEmpty())
+        while (this.isEmpty())
         {
             
-            throw (new SynchronizedQueueException(Cases.EMPTY));
+             try { wait(); }
+             catch (InterruptedException e) { }
+             finally { }
+
         }
         int tmpHead = head;
         head = (queue.length+head+1)%queue.length;
         E tmpItem = queue [tmpHead];
         queue[tmpHead] = null;
+        notify();
         return tmpItem;
     }
 
-    public synchronized  void  addTail (E item) throws SynchronizedQueueException
+    public synchronized  void  addTail (E item)  
     {
-        if (isFull())
+        while (this.isFull())
         {
-            throw  (new SynchronizedQueueException(Cases.FULL));
+              try { wait(); }
+              catch (InterruptedException e) { }
+              finally { }
         }
         queue[tail] = item;
         tail= (queue.length+tail+1)%queue.length;
+        notify();
     }
     
 }
