@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package threads;
 
 /**
  *
  * @author lucian
  */
-public class Main {
+public class Main
+{
 
     /**
      * @param args the command line arguments
@@ -20,10 +20,7 @@ public class Main {
         Producer producer = new Producer(queue, 500);
         Consumer consumer = new Consumer(queue);
 
-       producer.run();
-       consumer.run();
-       
-
+        producer.start();
+        consumer.start();
     }
-
 }

@@ -2,27 +2,28 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package threads;
 
 /**
  *
  * @author lucian
  */
-public class Producer extends  Thread
+public class Producer extends Thread
 {
+
     SynchronizedQueue<Integer> queue;
-    int max ;
-    public Producer(SynchronizedQueue<Integer> queue, int max )
+    int max;
+
+    public Producer(SynchronizedQueue<Integer> queue, int max)
     {
         this.queue = queue;
         this.max = max;
     }
 
-    @Override
+
     public void run()
     {
-        for (int i=0;i<max;i++)
+        for (int i = 0; i < max; i++)
         {
             try
             {
@@ -31,12 +32,10 @@ public class Producer extends  Thread
             catch (InterruptedException e)
             {
                 System.out.println(e);
-            } 
+            }
 
-            queue.addTail(i + 1);           
-            System.out.println("Producing "+ (i+1)+"...");
+            queue.addTail(i + 1);
+            System.out.println("Producing " + (i + 1) + "...");
         }
     }
-
-
 }

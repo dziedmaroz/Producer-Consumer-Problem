@@ -2,11 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package threads;
-
-
-  
 
 /**
  *
@@ -14,24 +10,25 @@ package threads;
  */
 public class Consumer extends Thread
 {
+
     SynchronizedQueue<Integer> queue;
 
-    @Override
+
     public void run()
     {
-        
-        while(true)
+
+        while (true)
         {
             try
             {
-                 sleep(100);
+                sleep(100);
             }
             catch (InterruptedException e)
             {
                 System.out.print(e);
-            } 
-            System.out.println("Consuming "+queue.removeHead());            
-            
+            }
+            System.out.println("Consuming " + queue.removeHead());
+
         }
     }
 
@@ -39,5 +36,4 @@ public class Consumer extends Thread
     {
         this.queue = queue;
     }
-    
 }
